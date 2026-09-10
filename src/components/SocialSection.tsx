@@ -36,16 +36,16 @@ export const SocialSection: React.FC<SocialSectionProps> = ({ socials }) => {
   };
 
   return (
-    <section id="kontak" className="py-12 border-b border-neutral-200/80 dark:border-neutral-800/80">
+    <section id="kontak" className="py-8 sm:py-12 border-b border-neutral-200/80 dark:border-neutral-800/80">
       {/* Header Bagian */}
-      <div className="mb-6">
-        <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-1">
+      <div className="mb-4 sm:mb-6">
+        <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-cyan-600 dark:text-cyan-400 mb-1">
           <Users className="w-3.5 h-3.5" />
           <span>Komunitas & Kontak</span>
         </div>
         <h2
           id="social-section-heading"
-          className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50"
+          className="text-lg sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50"
         >
           Kontak & Saluran Resmi WAVEID
         </h2>
@@ -55,7 +55,7 @@ export const SocialSection: React.FC<SocialSectionProps> = ({ socials }) => {
       </div>
 
       {/* Grid Kontak Telegram & WhatsApp */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         {socials.map(item => {
           const isTelegram = item.id === 'telegram';
           const isCopied = copiedId === item.id;
