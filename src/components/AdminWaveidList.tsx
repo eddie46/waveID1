@@ -48,9 +48,6 @@ export const AdminWaveidList: React.FC<AdminWaveidListProps> = ({
           >
             ADMIN WAVEID
           </h2>
-          <span className="text-[11px] sm:text-xs font-mono font-medium px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200/80 dark:border-neutral-700/80">
-            {admins.length}
-          </span>
         </div>
 
         {/* Tombol Utama Buka Daftar Part */}
@@ -61,7 +58,6 @@ export const AdminWaveidList: React.FC<AdminWaveidListProps> = ({
         >
           <Layers className="w-3.5 h-3.5" />
           <span>Lihat Daftar Part</span>
-          <span className="font-mono text-xs opacity-75">({partsCount})</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>

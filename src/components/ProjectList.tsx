@@ -130,67 +130,53 @@ Fungsi: ${item.functionDesc}`;
   };
 
   return (
-    <section id="proyek" className="py-10 border-b border-neutral-200/70 dark:border-neutral-800/70">
-      {/* Header Minimalis */}
+    <section id="proyek" className="py-8 sm:py-10 border-b border-neutral-200/70 dark:border-neutral-800/70">
+      {/* Header & Toolbar Minimalis & Rapi */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="w-2 h-2 rounded-full bg-cyan-500"></span>
-            <span className="text-[11px] font-mono uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="w-2 h-2 rounded-full bg-cyan-500 ring-2 ring-cyan-500/20"></span>
+            <span className="text-[11px] font-mono font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
               Katalog Hardware & Bill of Materials
             </span>
           </div>
           <h2
             id="projects-section-heading"
-            className="text-xl sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 flex items-center gap-2"
+            className="text-lg sm:text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50"
           >
-            <span>DAFTAR PART WAVEID</span>
-            {sectionTab === 'wiring' ? (
-              <span className="text-xs font-mono font-medium px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30">
-                Skematik Wiring
-              </span>
-            ) : (
-              <span className="text-xs font-mono font-medium px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">
-                {totalFilteredCount} Item
-              </span>
-            )}
+            <span className="text-neutral-900 dark:text-neutral-100">DAFTAR PART WAVEID</span>
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 mt-1">
-            {sectionTab === 'wiring'
-              ? 'Skematik resmi perakitan kabel & interkoneksi modul hardware sistem WAVEID.'
-              : 'Daftar lengkap 9 modul Part Utama & 10 Komponen Pendukung perakitan sistem.'}
-          </p>
         </div>
 
-        {/* Kontrol: Tombol Kembali ke Admin, Pencarian & Mode Tampilan */}
-        <div className="flex flex-wrap items-center gap-2">
+        {/* Toolbar: Tombol Kembali ke Admin, Pencarian, Unduh, & Mode Tampilan */}
+        <div className="flex items-center flex-wrap sm:flex-nowrap gap-2">
           {onBackToAdmin && (
             <button
               onClick={onBackToAdmin}
               id="btn-back-to-admin"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500/50 text-xs font-semibold transition-all cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-neutral-200/80 dark:border-neutral-700/80 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500/40 text-xs font-semibold transition-all cursor-pointer shadow-2xs shrink-0"
               title="Kembali ke Daftar Admin WAVEID"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <Users className="w-3.5 h-3.5 text-indigo-500" />
-              <span>Lihat Admin</span>
+              <span className="hidden sm:inline">Admin</span>
             </button>
           )}
 
-          <div className="relative w-full sm:w-56">
-            <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <div className="relative flex-grow sm:flex-grow-0 sm:w-52">
+            <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               id="search-part-input"
               value={searchQuery}
               onChange={e => setSearchQuery(e.target.value)}
-              placeholder="Cari part utama / pendukung..."
-              className="w-full pl-8 pr-7 py-1.5 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-xs text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-hidden focus:border-cyan-500 transition-colors"
+              placeholder="Cari nama part..."
+              className="w-full pl-8 pr-7 py-1.5 rounded-lg bg-white dark:bg-neutral-900 border border-neutral-200/80 dark:border-neutral-700/80 text-xs text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 focus:outline-hidden focus:border-cyan-500 transition-colors shadow-2xs"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200"
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-0.5 text-xs text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 cursor-pointer rounded"
                 title="Hapus pencarian"
               >
                 ✕
@@ -199,15 +185,15 @@ Fungsi: ${item.functionDesc}`;
           </div>
 
           {/* Tombol Unduh Daftar Part (BOM) */}
-          <div className="relative">
+          <div className="relative shrink-0">
             <button
               onClick={() => setIsDownloadMenuOpen(!isDownloadMenuOpen)}
               id="btn-download-part-list-menu"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold transition-all cursor-pointer shadow-sm active:scale-98"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold transition-all cursor-pointer shadow-xs active:scale-98"
               title="Unduh Daftar Part & Bill of Materials"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Unduh Part</span>
+              <span>Unduh</span>
               <ChevronDown className={`w-3 h-3 transition-transform ${isDownloadMenuOpen ? 'rotate-180' : ''}`} />
             </button>
 
@@ -271,13 +257,13 @@ Fungsi: ${item.functionDesc}`;
           </div>
 
           {/* Pengalih Tampilan (List / Grid) */}
-          <div className="flex items-center p-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shrink-0">
+          <div className="flex items-center p-0.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-700/80 shrink-0">
             <button
               onClick={() => setViewMode('list')}
               id="btn-view-list"
               className={`p-1.5 rounded-md text-xs transition-colors cursor-pointer ${
                 viewMode === 'list'
-                  ? 'bg-white dark:bg-neutral-900 text-cyan-600 dark:text-cyan-400 shadow-xs font-semibold'
+                  ? 'bg-white dark:bg-neutral-900 text-cyan-600 dark:text-cyan-400 shadow-2xs font-semibold'
                   : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
               }`}
               title="Tampilan List Minimalis"
@@ -289,7 +275,7 @@ Fungsi: ${item.functionDesc}`;
               id="btn-view-grid"
               className={`p-1.5 rounded-md text-xs transition-colors cursor-pointer ${
                 viewMode === 'grid'
-                  ? 'bg-white dark:bg-neutral-900 text-cyan-600 dark:text-cyan-400 shadow-xs font-semibold'
+                  ? 'bg-white dark:bg-neutral-900 text-cyan-600 dark:text-cyan-400 shadow-2xs font-semibold'
                   : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
               }`}
               title="Tampilan Grid Minimalis"
@@ -324,7 +310,6 @@ Fungsi: ${item.functionDesc}`;
         >
           <Layers className="w-3.5 h-3.5" />
           <span>Semua Part</span>
-          <span className="font-mono text-[10px] opacity-75">({projects.length + supportingComponents.length})</span>
         </button>
 
         <button
@@ -338,7 +323,6 @@ Fungsi: ${item.functionDesc}`;
         >
           <Cpu className="w-3.5 h-3.5 text-cyan-500" />
           <span>Part Utama</span>
-          <span className="font-mono text-[10px] opacity-75">({projects.length})</span>
         </button>
 
         <button
@@ -352,7 +336,6 @@ Fungsi: ${item.functionDesc}`;
         >
           <SlidersHorizontal className="w-3.5 h-3.5 text-indigo-500" />
           <span>Komponen Pendukung</span>
-          <span className="font-mono text-[10px] opacity-75">({supportingComponents.length})</span>
         </button>
 
         <button
@@ -366,7 +349,6 @@ Fungsi: ${item.functionDesc}`;
         >
           <GitFork className="w-3.5 h-3.5 text-amber-500" />
           <span>Wiring Diagram</span>
-          <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold">Skematik</span>
         </button>
       </div>
 
@@ -381,83 +363,56 @@ Fungsi: ${item.functionDesc}`;
           BAGIAN 1: PART UTAMA (9 Modul & IC Utama)
           ========================================================================= */}
       {(sectionTab === 'all' || sectionTab === 'main') && (
-        <div className="mb-10">
-          <div className="flex items-center justify-between gap-2 mb-3">
-            <div className="flex items-center gap-2">
-              <Cpu className="w-4 h-4 text-cyan-500" />
-              <h3 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-neutral-100">
-                Part Utama
-              </h3>
-              <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
-                {filteredMainParts.length} Modul
-              </span>
-            </div>
-            <span className="text-xs text-neutral-400 font-mono hidden sm:inline-block">
-              Mikrokontroler, Power & Telemetri
-            </span>
-          </div>
-
-          {/* Mode List Minimalis & Compact Mobile Accordion */}
+        <div className="mb-6">
+          {/* Mode List Minimalis */}
           {viewMode === 'list' && (
-            <div className="divide-y divide-neutral-200/60 dark:divide-neutral-800/60 border-y border-neutral-200/60 dark:border-neutral-800/60">
+            <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-white/70 dark:bg-neutral-900/50 backdrop-blur-xs overflow-hidden divide-y divide-neutral-200/60 dark:divide-neutral-800/60 shadow-2xs">
               {filteredMainParts.map((part, index) => {
                 const isEsp32 = part.id === 'part-esp32' || part.title.toLowerCase().includes('esp32');
-                const isExpanded = expandedItemId === part.id;
 
                 return (
                   <div
                     key={part.id}
                     id={`project-row-${part.id}`}
-                    className={`transition-colors rounded-lg ${
-                      isEsp32 ? 'bg-cyan-50/20 dark:bg-cyan-950/10' : ''
-                    } hover:bg-neutral-50/60 dark:hover:bg-neutral-900/40`}
+                    className={`transition-colors ${
+                      isEsp32 ? 'bg-cyan-500/5 dark:bg-cyan-500/10' : ''
+                    } hover:bg-neutral-50 dark:hover:bg-neutral-800/50`}
                   >
-                    {/* Baris Utama: Ringkas & Padat */}
-                    <div
-                      onClick={() => toggleExpand(part.id)}
-                      className="py-2.5 sm:py-3.5 px-2 sm:px-3 flex items-center justify-between gap-2 cursor-pointer select-none"
-                    >
+                    {/* Baris Utama: Nomor + Nama + Qty + Link + Salin */}
+                    <div className="py-2.5 sm:py-3 px-3 sm:px-4 flex items-center justify-between gap-3 select-none">
                       {/* Informasi Kiri: Nomor + Nama + Qty */}
-                      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-grow">
-                        <span className="font-mono text-[11px] sm:text-xs font-semibold text-neutral-400 dark:text-neutral-500 w-4 sm:w-5 shrink-0">
+                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-grow">
+                        <span className="font-mono text-xs font-bold text-neutral-400 dark:text-neutral-500 w-5 shrink-0 text-center">
                           {String(index + 1).padStart(2, '0')}
                         </span>
                         
                         <div className="min-w-0 flex-grow">
-                          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                          <div className="flex items-center gap-2 flex-wrap">
                             <h4 className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                               {part.title}
                             </h4>
 
                             {/* Badge Jumlah / Kuantitas */}
                             {part.quantity && (
-                              <span className="px-1.5 py-0.2 text-[9px] sm:text-[10px] font-mono font-medium rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 shrink-0">
+                              <span className="px-2 py-0.5 text-[10px] font-mono font-medium rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200/80 dark:border-neutral-700 shrink-0">
                                 {part.quantity}
-                              </span>
-                            )}
-
-                            {/* Badge Khusus ESP32 Inti */}
-                            {isEsp32 && (
-                              <span className="px-1.5 py-0.2 text-[9px] sm:text-[10px] font-semibold rounded bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 shrink-0">
-                                Inti
                               </span>
                             )}
                           </div>
                         </div>
                       </div>
 
-                      {/* Bagian Kanan: Button Link & Toggle Detail */}
-                      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                      {/* Bagian Kanan: Button Link & Salin Info */}
+                      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                         {part.buttonLink && (
                           <a
                             href={part.buttonLink.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            onClick={e => e.stopPropagation()}
                             id={`btn-link-${part.id}`}
-                            className={`inline-flex items-center gap-1 px-2 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold rounded-md sm:rounded-lg transition-all ${
+                            className={`inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold rounded-lg transition-all ${
                               isEsp32
-                                ? 'bg-gradient-to-r from-cyan-600 via-indigo-600 to-fuchsia-600 hover:opacity-90 text-white shadow-xs'
+                                ? 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-xs'
                                 : 'border border-neutral-200 dark:border-neutral-700 hover:border-cyan-500 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-cyan-600 dark:hover:text-cyan-400'
                             }`}
                             title={`Buka link dokumentasi ${part.title}`}
@@ -471,7 +426,7 @@ Fungsi: ${item.functionDesc}`;
                           type="button"
                           id={`btn-copy-part-${part.id}`}
                           onClick={e => handleCopyPartInfo(part, e)}
-                          className="p-1 sm:p-1.5 rounded-md border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                          className="p-1 sm:p-1.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors cursor-pointer"
                           title="Salin info part"
                         >
                           {copiedItemId === part.id ? (
@@ -480,46 +435,8 @@ Fungsi: ${item.functionDesc}`;
                             <Copy className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                           )}
                         </button>
-
-                        <button
-                          type="button"
-                          className="p-1 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 sm:hidden"
-                          aria-label="Buka detail"
-                        >
-                          <ChevronRight
-                            className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                              isExpanded ? 'rotate-90 text-cyan-500' : ''
-                            }`}
-                          />
-                        </button>
                       </div>
                     </div>
-
-                    {/* Detail Accordion Tambahan (Bisa Dibuka di Ponsel/Desktop) */}
-                    {isExpanded && (
-                      <div className="px-3 pb-3 pt-1 text-xs border-t border-neutral-100 dark:border-neutral-800/60 bg-neutral-50/50 dark:bg-neutral-900/30 sm:hidden animate-in fade-in duration-150">
-                        <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                          {part.description}
-                        </p>
-                        <div className="mt-2 flex flex-wrap gap-1.5 text-[10px]">
-                          {part.code && (
-                            <span className="font-mono px-1.5 py-0.5 rounded bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
-                              Kode: {part.code}
-                            </span>
-                          )}
-                          {part.brand && (
-                            <span className="px-1.5 py-0.5 rounded bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
-                              Brand: {part.brand}
-                            </span>
-                          )}
-                          {part.compatibility && (
-                            <span className="px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-700 dark:text-cyan-300">
-                              {part.compatibility}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    )}
                   </div>
                 );
               })}
@@ -528,7 +445,7 @@ Fungsi: ${item.functionDesc}`;
 
           {/* Mode Grid Minimalis */}
           {viewMode === 'grid' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {filteredMainParts.map((part, index) => {
                 const isEsp32 = part.id === 'part-esp32' || part.title.toLowerCase().includes('esp32');
 
@@ -536,7 +453,7 @@ Fungsi: ${item.functionDesc}`;
                   <article
                     key={part.id}
                     id={`project-card-${part.id}`}
-                    className={`p-4 rounded-xl border flex flex-col justify-between transition-all bg-white dark:bg-neutral-900/80 ${
+                    className={`p-3.5 rounded-xl border flex flex-col justify-between transition-all bg-white dark:bg-neutral-900/80 ${
                       isEsp32
                         ? 'border-cyan-500/50 dark:border-cyan-400/50 shadow-xs ring-1 ring-cyan-500/20'
                         : 'border-neutral-200/80 dark:border-neutral-800/80 hover:border-neutral-300 dark:hover:border-neutral-700'
@@ -557,13 +474,9 @@ Fungsi: ${item.functionDesc}`;
                       <h4 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
                         {part.title}
                       </h4>
-
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1.5 leading-relaxed line-clamp-3">
-                        {part.description}
-                      </p>
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/70 flex items-center justify-between gap-2">
+                    <div className="mt-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800/70 flex items-center justify-between gap-2">
                       {part.buttonLink ? (
                         <a
                           href={part.buttonLink.url}
@@ -585,7 +498,7 @@ Fungsi: ${item.functionDesc}`;
                       <button
                         type="button"
                         onClick={() => handleCopyPartInfo(part)}
-                        className="p-1 rounded-md text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors"
+                        className="p-1 rounded-md text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors cursor-pointer"
                         title="Salin info part"
                       >
                         {copiedItemId === part.id ? (
@@ -607,107 +520,52 @@ Fungsi: ${item.functionDesc}`;
           BAGIAN 2: KOMPONEN PENDUKUNG (10 Komponen Pasif & Konektor)
           ========================================================================= */}
       {(sectionTab === 'all' || sectionTab === 'supporting') && (
-        <div>
-          <div className="flex items-center justify-between gap-2 mb-3">
-            <div className="flex items-center gap-2">
-              <SlidersHorizontal className="w-4 h-4 text-indigo-500" />
-              <h3 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-neutral-100">
-                Komponen Pendukung
-              </h3>
-              <span className="text-[11px] font-mono font-medium px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
-                {filteredSupportingParts.length} Komponen
-              </span>
-            </div>
-            <span className="text-xs text-neutral-400 font-mono hidden sm:inline-block">
-              Pasif, Konektor, Resistor & Audio
-            </span>
-          </div>
-
-          {/* Mode List Minimalis & Compact Mobile Accordion */}
+        <div className="mb-6">
+          {/* Mode List Minimalis */}
           {viewMode === 'list' && (
-            <div className="divide-y divide-neutral-200/60 dark:divide-neutral-800/60 border-y border-neutral-200/60 dark:border-neutral-800/60">
+            <div className="rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-white/70 dark:bg-neutral-900/50 backdrop-blur-xs overflow-hidden divide-y divide-neutral-200/60 dark:divide-neutral-800/60 shadow-2xs">
               {filteredSupportingParts.map((item, index) => {
-                const isExpanded = expandedItemId === item.id;
-
                 return (
                   <div
                     key={item.id}
                     id={`supporting-row-${item.id}`}
-                    className="transition-colors rounded-lg hover:bg-neutral-50/60 dark:hover:bg-neutral-900/40"
+                    className="transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/50"
                   >
-                    {/* Baris Utama: Ringkas */}
-                    <div
-                      onClick={() => toggleExpand(item.id)}
-                      className="py-2.5 sm:py-3 px-2 sm:px-3 flex items-center justify-between gap-2 cursor-pointer select-none"
-                    >
-                      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-grow">
-                        <span className="font-mono text-[11px] sm:text-xs font-semibold text-neutral-400 dark:text-neutral-500 w-4 sm:w-5 shrink-0">
+                    {/* Baris Utama: Nomor + Nama Komponen + Qty + Tombol Salin */}
+                    <div className="py-2.5 sm:py-3 px-3 sm:px-4 flex items-center justify-between gap-3 select-none">
+                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-grow">
+                        <span className="font-mono text-xs font-bold text-neutral-400 dark:text-neutral-500 w-5 shrink-0 text-center">
                           {String(index + 1).padStart(2, '0')}
                         </span>
                         
                         <div className="min-w-0 flex-grow">
-                          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                          <div className="flex items-center gap-2 flex-wrap">
                             <h4 className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
                               {item.name}
                             </h4>
-                            <span className="px-1.5 py-0.2 text-[9px] sm:text-[10px] font-mono font-semibold rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 shrink-0">
+                            <span className="px-2 py-0.5 text-[10px] font-mono font-semibold rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 shrink-0">
                               Qty: {item.quantity}
                             </span>
-                            {item.spec && (
-                              <span className="hidden md:inline-block text-[11px] font-mono text-neutral-500 dark:text-neutral-400">
-                                • {item.spec}
-                              </span>
-                            )}
                           </div>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
-                        <span className="text-[10px] sm:text-[11px] font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800/80 px-1.5 sm:px-2 py-0.5 rounded">
-                          {item.type}
-                        </span>
-
+                      <div className="flex items-center gap-2 shrink-0">
                         <button
                           type="button"
                           id={`btn-copy-supp-${item.id}`}
                           onClick={e => handleCopySupportingInfo(item, e)}
-                          className="p-1 sm:p-1.5 rounded-md border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                          className="p-1.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500/40 transition-colors cursor-pointer"
                           title="Salin info komponen"
                         >
                           {copiedItemId === item.id ? (
-                            <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-500" />
+                            <Check className="w-3.5 h-3.5 text-emerald-500" />
                           ) : (
-                            <Copy className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                            <Copy className="w-3.5 h-3.5" />
                           )}
-                        </button>
-
-                        <button
-                          type="button"
-                          className="p-1 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 sm:hidden"
-                          aria-label="Buka detail"
-                        >
-                          <ChevronRight
-                            className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                              isExpanded ? 'rotate-90 text-indigo-500' : ''
-                            }`}
-                          />
                         </button>
                       </div>
                     </div>
-
-                    {/* Detail Accordion Tambahan di Mobile */}
-                    {isExpanded && (
-                      <div className="px-3 pb-3 pt-1 text-xs border-t border-neutral-100 dark:border-neutral-800/60 bg-neutral-50/50 dark:bg-neutral-900/30 sm:hidden animate-in fade-in duration-150">
-                        <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
-                          {item.functionDesc}
-                        </p>
-                        {item.spec && (
-                          <div className="mt-1.5 text-[10px] font-mono text-neutral-500 dark:text-neutral-400">
-                            Spesifikasi: {item.spec}
-                          </div>
-                        )}
-                      </div>
-                    )}
                   </div>
                 );
               })}
@@ -735,24 +593,13 @@ Fungsi: ${item.functionDesc}`;
                     <h4 className="text-sm font-bold text-neutral-900 dark:text-neutral-100">
                       {item.name}
                     </h4>
-                    {item.spec && (
-                      <div className="text-[11px] font-mono text-neutral-500 dark:text-neutral-400 mt-0.5">
-                        {item.spec}
-                      </div>
-                    )}
-                    <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed line-clamp-2">
-                      {item.functionDesc}
-                    </p>
                   </div>
 
-                  <div className="mt-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800/70 flex items-center justify-between">
-                    <span className="text-[10px] font-medium text-neutral-500 bg-neutral-100 dark:bg-neutral-800 px-2 py-0.5 rounded">
-                      {item.type}
-                    </span>
+                  <div className="mt-3 pt-2.5 border-t border-neutral-100 dark:border-neutral-800/70 flex items-center justify-end">
                     <button
                       type="button"
                       onClick={() => handleCopySupportingInfo(item)}
-                      className="p-1 rounded text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors"
+                      className="p-1 rounded text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors cursor-pointer"
                       title="Salin info komponen"
                     >
                       {copiedItemId === item.id ? (
@@ -766,6 +613,20 @@ Fungsi: ${item.functionDesc}`;
               ))}
             </div>
           )}
+
+          {/* Tombol Link di Bawah List Komponen Pendukung */}
+          <div className="mt-3.5 flex items-center justify-center sm:justify-start">
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              id="btn-supporting-components-link"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg transition-all bg-indigo-600 hover:bg-indigo-500 text-white shadow-xs active:scale-98 cursor-pointer"
+            >
+              <span>Link Komponen Pendukung</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
         </div>
       )}
 

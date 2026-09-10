@@ -55,6 +55,10 @@ export interface SupportingComponentItem {
   type: string;
   spec?: string;
   functionDesc: string;
+  buttonLink?: {
+    label: string;
+    url: string;
+  };
 }
 
 export interface WaveidAdmin {
