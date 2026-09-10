@@ -394,7 +394,7 @@ export const adminWaveidData: WaveidAdmin[] = [
   },
   {
     id: "admin-sigma",
-    name: "Sigma",
+    name: "sigma",
     category: "Developer Design & Register",
     role: "Developer Design & Register",
     divisionBadge: "Design & Register",
