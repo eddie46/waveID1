@@ -1,23 +1,21 @@
 import React from 'react';
-import { Sun, Moon, Code, BookOpen } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 interface NavbarProps {
   name: string;
   isDark: boolean;
   onToggleTheme: () => void;
-  onOpenExportModal: () => void;
 }
 
 /**
  * Komponen Navbar:
  * Header tetap (sticky) dengan efek blur kaca modern, navigasi bagian,
- * tombol ganti tema (mode terang/gelap), dan tombol panduan GitHub Pages.
+ * dan tombol ganti tema (mode terang/gelap).
  */
 export const Navbar: React.FC<NavbarProps> = ({
   name,
   isDark,
-  onToggleTheme,
-  onOpenExportModal
+  onToggleTheme
 }) => {
   return (
     <header
@@ -41,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Navigasi Tautan */}
         <nav className="flex items-center gap-1 sm:gap-2">
-          <div className="hidden sm:flex items-center gap-1 mr-2 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+          <div className="flex items-center gap-1 mr-2 text-sm font-medium text-neutral-600 dark:text-neutral-400">
             <a
               href="#profil"
               id="nav-link-profil"
@@ -71,20 +69,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               Kontak
             </a>
           </div>
-
-          {/* Tombol Buka Kode & Panduan GitHub.io */}
-          <button
-            id="btn-open-github-guide"
-            onClick={onOpenExportModal}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-cyan-500/30 dark:border-cyan-500/30 text-neutral-700 dark:text-neutral-300 hover:bg-cyan-50 dark:hover:bg-cyan-950/40 hover:border-cyan-500 dark:hover:border-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 transition-all cursor-pointer"
-            title="Dapatkan file index.html mandiri & panduan GitHub Pages"
-          >
-            <Code className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
-            <span className="hidden xs:inline">index.html</span>
-            <span className="text-[10px] bg-gradient-to-r from-cyan-500/15 to-fuchsia-500/15 border border-cyan-500/30 text-cyan-800 dark:text-cyan-300 px-1.5 py-0.5 rounded font-mono font-semibold">
-              Export
-            </span>
-          </button>
 
           {/* Tombol Toggle Mode Gelap / Terang */}
           <button

@@ -6,7 +6,6 @@ import { AdminWaveidList } from './components/AdminWaveidList';
 import { SkillsSection } from './components/SkillsSection';
 import { SocialSection } from './components/SocialSection';
 import { Footer } from './components/Footer';
-import { ExportModal } from './components/ExportModal';
 import {
   profileData,
   projectsData,
@@ -29,7 +28,6 @@ import {
  * 3. Tata Letak Fleksibel Berbasis CSS Grid & Flexbox Responsif
  * 4. Daftar Admin WAVEID Lengkap dengan Pas Foto Resmi
  * 5. Daftar Part Utama (9 Modul) & Komponen Pendukung (10 Item)
- * 6. Tombol Ekspor Kode Mandiri (Single-File index.html) + Panduan Lengkap
  * ============================================================================
  */
 export default function App() {
@@ -48,9 +46,6 @@ export default function App() {
   // Status tampilan daftar part vs daftar admin WAVEID
   // Sebelum tombol "Lihat Daftar Part" ditekan, daftar part tersembunyi dan menampilkan daftar para admin
   const [showPartsList, setShowPartsList] = useState<boolean>(false);
-
-  // Status Modal Panduan & Ekspor Kode index.html
-  const [isExportModalOpen, setIsExportModalOpen] = useState<boolean>(false);
 
   // Sinkronisasi kelas 'dark' pada elemen root <html>
   useEffect(() => {
@@ -89,7 +84,6 @@ export default function App() {
         name={profileData.name}
         isDark={isDark}
         onToggleTheme={toggleTheme}
-        onOpenExportModal={() => setIsExportModalOpen(true)}
       />
 
       {/* Kontainer Utama Terpusat (Maks 896px) */}
@@ -134,18 +128,6 @@ export default function App() {
           name={profileData.name}
         />
       </main>
-
-      {/* 7. Modal Panduan Hosting GitHub.io & Kode HTML Mandiri */}
-      <ExportModal
-        isOpen={isExportModalOpen}
-        onClose={() => setIsExportModalOpen(false)}
-        profile={profileData}
-        projects={projectsData}
-        supportingComponents={supportingComponentsData}
-        admins={adminWaveidData}
-        socials={socialLinks}
-        skills={skillCategories}
-      />
     </div>
   );
 }
