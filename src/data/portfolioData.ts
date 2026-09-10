@@ -16,7 +16,7 @@ export const profileData: ProfileData = {
   bio: "Selamat datang member WAVEID! Pengembang software PC desktop, platform monitoring telemetri, dan integrasi antarmuka stasiun WAVEID. Senang berbagi proyek teknologi, eksplorasi open-source, dan berkolaborasi bersama seluruh rekan WAVEID.",
   location: "Indonesia",
   // Ganti URL foto avatar berikut dengan link foto profil GitHub Anda atau URL lain
-  avatarUrl: "/admin-photos/delta_center.jpg",
+  avatarUrl: "admin-photos/delta_center.jpg",
   status: {
     available: true,
     text: "Member WAVEID & Terbuka untuk Kolaborasi"
@@ -318,7 +318,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     category: "Developer Evangelist",
     role: "Developer Evangelist",
     divisionBadge: "Evangelist",
-    photoUrl: "/admin-photos/rphone.jpg",
+    photoUrl: "admin-photos/rphone.jpg",
     bio: "Advokasi teknologi IoT, kurasi standar hardware WAVEID, dan penghubung ekosistem developer."
   },
   {
@@ -327,7 +327,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     category: "Administrasi",
     role: "Administrasi",
     divisionBadge: "Administrasi",
-    photoUrl: "/admin-photos/wildan.jpg",
+    photoUrl: "admin-photos/wildan.jpg",
     bio: "Manajemen data anggota, koordinasi administratif operasional, dan tata kelola registrasi WAVEID."
   },
   {
@@ -337,7 +337,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     role: "Developer",
     subRole: "PC",
     divisionBadge: "PC Developer",
-    photoUrl: "/admin-photos/delta_center.jpg",
+    photoUrl: "admin-photos/delta_center.jpg",
     bio: "Pengembangan software PC desktop, platform monitoring telemetri, dan integrasi antarmuka stasiun."
   },
   {
@@ -347,7 +347,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     role: "Developer",
     subRole: "OS",
     divisionBadge: "OS Developer",
-    photoUrl: "/admin-photos/deylight.jpg",
+    photoUrl: "admin-photos/deylight.jpg",
     bio: "Arsitektur sistem operasi mikro, firmware ESP-IDF, RTOS task scheduler, dan protokol jaringan."
   },
   {
@@ -357,7 +357,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     role: "Developer",
     subRole: "HW",
     divisionBadge: "HW Developer",
-    photoUrl: "/admin-photos/kadavie.jpg",
+    photoUrl: "admin-photos/kadavie.jpg",
     bio: "Desain sirkuit PCB hardware, routing daya StepDown, kalibrasi sensor shunt INA3221 & switching MOSFET."
   },
   {
@@ -366,7 +366,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     category: "Developer Design & Register",
     role: "Developer Design & Register",
     divisionBadge: "Design & Register",
-    photoUrl: "/admin-photos/ae_ponorogo.jpg",
+    photoUrl: "admin-photos/ae_ponorogo.jpg",
     bio: "Perancangan tata letak visual, 3D enclosure hardware, dan standarisasi formulir registrasi sistem."
   },
   {
@@ -375,7 +375,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     category: "Developer Design & Register",
     role: "Developer Design & Register",
     divisionBadge: "Design & Register",
-    photoUrl: "/admin-photos/sigma.jpg",
+    photoUrl: "admin-photos/sigma.jpg",
     bio: "Spesialis arsitektur registrasi seri komponen, integrasi visual brand WAVEID, dan validasi unit."
   },
   {
@@ -384,7 +384,7 @@ export const adminWaveidData: WaveidAdmin[] = [
     category: "Developer Design & Register",
     role: "Developer Design & Register",
     divisionBadge: "Design & Register",
-    photoUrl: "/admin-photos/diana_novita.jpg",
+    photoUrl: "admin-photos/diana_novita.jpg",
     bio: "Desain grafis teknis, dokumentasi skematik pengguna, dan pengelolaan registry identitas perangkat."
   }
 ];

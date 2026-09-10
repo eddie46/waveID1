@@ -107,7 +107,7 @@ export const WiringDiagramViewer: React.FC = () => {
           </button>
 
           <a
-            href="/wiring_diagram.jpg"
+            href="wiring_diagram.jpg"
             download="WAVEID_Wiring_Diagram.jpg"
             className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 hover:opacity-90 text-xs font-semibold transition-all shadow-xs"
             title="Unduh Gambar Skematik"
@@ -131,7 +131,7 @@ export const WiringDiagramViewer: React.FC = () => {
             onClick={() => setIsFullscreen(true)}
           >
             <img
-              src="/wiring_diagram.jpg"
+              src="wiring_diagram.jpg"
               alt="Wiring Diagram Skematik Sistem WAVEID"
               className="max-w-full h-auto rounded-lg shadow-md border border-neutral-200/80 dark:border-neutral-800"
               loading="lazy"
@@ -315,7 +315,7 @@ export const WiringDiagramViewer: React.FC = () => {
             onClick={() => setIsFullscreen(false)}
           >
             <img
-              src="/wiring_diagram.jpg"
+              src="wiring_diagram.jpg"
               alt="WAVEID Wiring Diagram High Resolution"
               className="max-w-full max-h-full object-contain rounded-lg shadow-2xl border border-neutral-800"
               onClick={e => e.stopPropagation()}
