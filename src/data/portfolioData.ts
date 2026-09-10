@@ -229,7 +229,7 @@ export const projectsData: ProjectItem[] = [
 export const supportingComponentsData: SupportingComponentItem[] = [
   {
     id: "supp-buzzer",
-    name: "Buzze Aktif",
+    name: "Buzzer Aktif",
     quantity: "1 Unit",
     type: "Audio & Alert",
     spec: "5V / 12V Active/Passive Buzzer",
@@ -262,7 +262,7 @@ export const supportingComponentsData: SupportingComponentItem[] = [
   {
     id: "supp-res-7k5-pair",
     name: "Resistor 10k",
-    quantity: "2 Buah",
+    quantity: "1 Buah",
     type: "Resistor Film Logam",
     spec: "7.5kΩ 1/4W 1% Presisi",
     functionDesc: "Pasangan pembagi tegangan (divider) rasio sampling analog pada ADC atau sirkuit komparator."
@@ -270,7 +270,7 @@ export const supportingComponentsData: SupportingComponentItem[] = [
   {
     id: "supp-res-7k5-single",
     name: "Resistor 7k5",
-    quantity: "1 Buah",
+    quantity: "3 Buah",
     type: "Resistor Film Logam",
     spec: "7.5kΩ (7k5) 1/4W 1% Presisi",
     functionDesc: "Resistor presisi untuk kalibrasi impedansi referensi jalur sinyal analog atau biasing."
