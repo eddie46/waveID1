@@ -342,7 +342,7 @@ export const adminWaveidData: WaveidAdmin[] = [
   },
   {
     id: "admin-deylight",
-    name: "Dieylights",
+    name: "dieylights",
     category: "Developer",
     role: "Developer",
     subRole: "OS",
