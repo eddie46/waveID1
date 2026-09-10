@@ -1,0 +1,6 @@
+{
+  "name": "Portofolio GitHub.io Minimalis",
+  "description": "Website portofolio dan katalog Daftar Part Utama WAVEID, struktur Admin WAVEID dengan pas foto resmi, profil member, serta ekspor single-file HTML GitHub Pages.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
