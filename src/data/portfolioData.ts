@@ -57,9 +57,8 @@ export const projectsData: ProjectItem[] = [
     category: "controller",
     buttonLink: {
       label: "Buka Link ESP32",
-      url: "https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-devkitc.html"
+      url: "https://www.google.com/search?q=esp32+38+pin+shop"
     },
-    demoUrl: "https://docs.espressif.com/projects/esp-idf/en/latest/esp32/hw-reference/esp32/get-started-devkitc.html",
     featured: true,
     year: "2025",
     metrics: "Otak Utama"
@@ -166,12 +165,12 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "part-relay12v",
-    title: "Relay 12V 1 Channel (2bh)",
+    title: "Relay 12V 1 Channel",
     code: "RELAY-12V",
     brand: "Songle Relay",
     compatibility: "Saklar Pemutus Fisik Jalur Utama 12V",
     priceEstimate: "Rp 16.000 - Rp 25.000 (2 Unit)",
-    quantity: "2 Buah (2bh)",
+    quantity: "2 Buah",
     condition: "Dual Unit 10A",
     description: "2 buah modul relay elektromekanikal 12V dengan optocoupler dan kontak COM/NO/NC berkapasitas 10A.",
     tags: ["Relay 12V", "2 Buah (2bh)", "Kontak 10A"],
@@ -206,8 +205,8 @@ export const projectsData: ProjectItem[] = [
   },
   {
     id: "part-qc30",
-    title: "Modul QC 2.0/3.0 StepDown",
-    code: "QC3.0-STEPDOWN",
+    title: "Modul QC 2.0 StepDown",
+    code: "QC2.0-STEPDOWN",
     brand: "Qualcomm Compatible",
     compatibility: "Charger USB Cepat Input Aki 6V - 32V",
     priceEstimate: "Rp 18.000 - Rp 30.000",
@@ -218,11 +217,11 @@ export const projectsData: ProjectItem[] = [
     category: "power",
     buttonLink: {
       label: "Link Modul",
-      url: "https://www.google.com/search?q=modul+qc+3.0+stepdown"
+      url: "https://www.google.com/search?q=modul+qc+2.0+stepdown"
     },
     featured: false,
     year: "2025",
-    metrics: "Qualcomm QC 3.0"
+    metrics: "Qualcomm QC 2.0"
   }
 ];
 
@@ -230,7 +229,7 @@ export const projectsData: ProjectItem[] = [
 export const supportingComponentsData: SupportingComponentItem[] = [
   {
     id: "supp-buzzer",
-    name: "Buzzer",
+    name: "Buzze Aktif",
     quantity: "1 Unit",
     type: "Audio & Alert",
     spec: "5V / 12V Active/Passive Buzzer",
@@ -238,7 +237,7 @@ export const supportingComponentsData: SupportingComponentItem[] = [
   },
   {
     id: "supp-banana-jack",
-    name: "Banana Jack Female(3set)",
+    name: "Banana Jack Female",
     quantity: "3 Set",
     type: "Konektor Daya / Probe",
     spec: "4mm Binding Post Socket (Merah & Hitam)",
@@ -246,67 +245,91 @@ export const supportingComponentsData: SupportingComponentItem[] = [
   },
   {
     id: "supp-cap-100nf",
-    name: "Capasitor 100nF (2bh)",
-    quantity: "2 Buah (2bh)",
+    name: "Capasitor 100nF",
+    quantity: "2 Buah",
     type: "Kapasitor Keramik",
     spec: "100nF / 0.1µF (Kode 104) 50V",
     functionDesc: "Kapasitor decoupling penyaring gangguan frekuensi tinggi (noise filter) dan stabilisasi rel tegangan IC."
   },
   {
     id: "supp-res-30k",
-    name: "Resistor 30k (3bh)",
-    quantity: "3 Buah (3bh)",
+    name: "Resistor 30k",
+    quantity: "3 Buah",
     type: "Resistor Film Logam",
     spec: "30kΩ 1/4W 1% Presisi",
     functionDesc: "Pembagi tegangan (voltage divider) bersama resistor 7.5k untuk pembacaan tegangan aki motor."
   },
   {
     id: "supp-res-7k5-pair",
-    name: "Resistor 7.5k (2bh)",
-    quantity: "2 Buah (2bh)",
+    name: "Resistor 10k",
+    quantity: "2 Buah",
     type: "Resistor Film Logam",
     spec: "7.5kΩ 1/4W 1% Presisi",
     functionDesc: "Pasangan pembagi tegangan (divider) rasio sampling analog pada ADC atau sirkuit komparator."
   },
   {
     id: "supp-res-7k5-single",
-    name: "Resistor 7k5 (1bh)",
-    quantity: "1 Buah (1bh)",
+    name: "Resistor 7k5",
+    quantity: "1 Buah",
     type: "Resistor Film Logam",
     spec: "7.5kΩ (7k5) 1/4W 1% Presisi",
     functionDesc: "Resistor presisi untuk kalibrasi impedansi referensi jalur sinyal analog atau biasing."
   },
   {
     id: "supp-res-4k7",
-    name: "Resistor 4k7 (1bh)",
-    quantity: "1 Buah (1bh)",
+    name: "Resistor 4k7",
+    quantity: "1 Buah",
     type: "Resistor Film Logam",
     spec: "4.7kΩ (4k7) 1/4W 1% Presisi",
     functionDesc: "Resistor pull-up jalur komunikasi bus I2C (SDA/SCL) untuk kestabilan modul sensor INA3221 & ADS1115."
   },
   {
     id: "supp-res-470k",
-    name: "Resistor 470k (1bh)",
-    quantity: "1 Buah (1bh)",
+    name: "Resistor 470k",
+    quantity: "1 Buah",
     type: "Resistor Film Logam",
     spec: "470kΩ 1/4W 1% Presisi",
     functionDesc: "Resistor nilai tinggi untuk penguras muatan kapasitor gerbang (gate pull-down bleeder) pada MOSFET LR7843."
   },
   {
     id: "supp-potensio",
-    name: "Potensio Rotari (1bh)",
-    quantity: "1 Buah (1bh)",
+    name: "Potensio Multiturn (sesuaikan)",
+    quantity: "1 Buah",
     type: "Kontrol Analog Manual",
     spec: "Rotary Potentiometer / Trimpot 3-Pin",
     functionDesc: "Pengatur analog putar untuk kalibrasi batas sensitivitas, fine-tuning tegangan, atau dimmer kecepatan."
   },
   {
     id: "supp-usb-female",
-    name: "Socket Port Usb female 2.0/3.0 (2bh)",
-    quantity: "2 Buah (2bh)",
+    name: "Socket Port Usb female 2.0",
+    quantity: "2 Buah",
     type: "Port USB Panel Mount",
     spec: "USB Type-A Female Dual Port",
     functionDesc: "Soket keluaran pengisian daya cepat dari modul QC 2.0/3.0 untuk charge smartphone/gadget pengendara."
+  },
+  {
+    id: "supp-ams1117-1v8",
+    name: "AMS1117-1.8V",
+    quantity: "1 Buah",
+    type: "Voltage Regulator LDO",
+    spec: "1.8V Low Dropout Linear Regulator",
+    functionDesc: "Regulator penurun tegangan 1.8V untuk catu daya dan level logika komunikasi serial RX/TX board HP."
+  },
+  {
+    id: "supp-diode-1n4148",
+    name: "Dioda 1N4148",
+    quantity: "1 Buah",
+    type: "Dioda Sinyal Cepat (Fast Switching)",
+    spec: "High-speed Diode 100V 150mA (DO-35)",
+    functionDesc: "Dioda flyback / freewheeling pada koil relay 12V untuk meredam lonjakan EMF balik (tegangan induktif)."
+  },
+  {
+    id: "supp-rshunt-r010",
+    name: "Rshunt R010 toll 1%",
+    quantity: "3 Buah",
+    type: "Resistor Shunt Sampling Arus",
+    spec: "0.01Ω (R010) Toleransi 1% Presisi Tinggi",
+    functionDesc: "Resistor shunt pengganti R100 pada modul INA3221 untuk pengukuran arus tinggi dengan akurasi maksimal."
   }
 ];
 
@@ -371,7 +394,7 @@ export const adminWaveidData: WaveidAdmin[] = [
   },
   {
     id: "admin-sigma",
-    name: "Sigma",
+    name: "sigma",
     category: "Developer Design & Register",
     role: "Developer Design & Register",
     divisionBadge: "Design & Register",
