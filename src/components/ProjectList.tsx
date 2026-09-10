@@ -18,7 +18,9 @@ import {
   FileText,
   FileCode,
   Printer,
-  ChevronDown
+  ChevronDown,
+  ChevronRight,
+  Info
 } from 'lucide-react';
 import { ProjectItem, SupportingComponentItem } from '../types';
 import { supportingComponentsData as defaultSupportingComponents } from '../data/portfolioData';
@@ -37,7 +39,7 @@ interface ProjectListProps {
 }
 
 /**
- * Komponen ProjectList (Halaman DAFTAR PART WAVEID Minimalis):
+ * Komponen ProjectList (Halaman DAFTAR PART WAVEID Minimalis & Ultra-Compact Mobile):
  * Menampilkan:
  * 1. Part Utama (9 Modul & Komponen Inti)
  * 2. Komponen Pendukung (10 Komponen Pasif & Aksesoris)
@@ -48,11 +50,16 @@ export const ProjectList: React.FC<ProjectListProps> = ({
   supportingComponents = defaultSupportingComponents,
   onBackToAdmin
 }) => {
-  const [sectionTab, setSectionTab] = useState<'all' | 'main' | 'supporting' | 'wiring'>('all');
+  const [sectionTab, setSectionTab] = useState<'all' | 'main' | 'supporting' | 'wiring'>('main');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
   const [copiedItemId, setCopiedItemId] = useState<string | null>(null);
   const [isDownloadMenuOpen, setIsDownloadMenuOpen] = useState<boolean>(false);
+  const [expandedItemId, setExpandedItemId] = useState<string | null>(null);
+
+  const toggleExpand = (id: string) => {
+    setExpandedItemId(prev => (prev === id ? null : id));
+  };
 
   // Filter Part Utama
   const filteredMainParts = useMemo(() => {
@@ -92,7 +99,8 @@ export const ProjectList: React.FC<ProjectListProps> = ({
     (sectionTab === 'supporting' ? 0 : filteredMainParts.length) +
     (sectionTab === 'main' ? 0 : filteredSupportingParts.length);
 
-  const handleCopyPartInfo = (part: ProjectItem) => {
+  const handleCopyPartInfo = (part: ProjectItem, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     const text = `[PART UTAMA WAVEID] ${part.title}
 Kode: ${part.code || '-'}
 Jumlah: ${part.quantity || '1 Unit'}
@@ -106,7 +114,8 @@ ${part.buttonLink ? `Link: ${part.buttonLink.url}` : ''}`;
     }, 2000);
   };
 
-  const handleCopySupportingInfo = (item: SupportingComponentItem) => {
+  const handleCopySupportingInfo = (item: SupportingComponentItem, e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
     const text = `[KOMPONEN PENDUKUNG WAVEID] ${item.name}
 Jumlah: ${item.quantity}
 Tipe: ${item.type}
@@ -388,88 +397,129 @@ Fungsi: ${item.functionDesc}`;
             </span>
           </div>
 
-          {/* Mode List Minimalis */}
+          {/* Mode List Minimalis & Compact Mobile Accordion */}
           {viewMode === 'list' && (
             <div className="divide-y divide-neutral-200/60 dark:divide-neutral-800/60 border-y border-neutral-200/60 dark:border-neutral-800/60">
               {filteredMainParts.map((part, index) => {
                 const isEsp32 = part.id === 'part-esp32' || part.title.toLowerCase().includes('esp32');
+                const isExpanded = expandedItemId === part.id;
 
                 return (
                   <div
                     key={part.id}
                     id={`project-row-${part.id}`}
-                    className={`py-3.5 sm:py-4 px-2 sm:px-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors hover:bg-neutral-50/60 dark:hover:bg-neutral-900/40 rounded-lg ${
+                    className={`transition-colors rounded-lg ${
                       isEsp32 ? 'bg-cyan-50/20 dark:bg-cyan-950/10' : ''
-                    }`}
+                    } hover:bg-neutral-50/60 dark:hover:bg-neutral-900/40`}
                   >
-                    {/* Informasi Kiri: Nomor + Nama + Deskripsi Singkat */}
-                    <div className="flex items-start sm:items-center gap-3 min-w-0">
-                      <span className="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-500 w-5 shrink-0 pt-0.5 sm:pt-0">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <h4 className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-neutral-100">
-                            {part.title}
-                          </h4>
+                    {/* Baris Utama: Ringkas & Padat */}
+                    <div
+                      onClick={() => toggleExpand(part.id)}
+                      className="py-2.5 sm:py-3.5 px-2 sm:px-3 flex items-center justify-between gap-2 cursor-pointer select-none"
+                    >
+                      {/* Informasi Kiri: Nomor + Nama + Qty */}
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-grow">
+                        <span className="font-mono text-[11px] sm:text-xs font-semibold text-neutral-400 dark:text-neutral-500 w-4 sm:w-5 shrink-0">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        
+                        <div className="min-w-0 flex-grow">
+                          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                            <h4 className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+                              {part.title}
+                            </h4>
 
-                          {/* Badge Jumlah / Kuantitas */}
-                          {part.quantity && (
-                            <span className="px-1.5 py-0.5 text-[10px] font-mono font-medium rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">
-                              {part.quantity}
-                            </span>
-                          )}
+                            {/* Badge Jumlah / Kuantitas */}
+                            {part.quantity && (
+                              <span className="px-1.5 py-0.2 text-[9px] sm:text-[10px] font-mono font-medium rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700 shrink-0">
+                                {part.quantity}
+                              </span>
+                            )}
 
-                          {/* Badge Khusus ESP32 Inti */}
-                          {isEsp32 && (
-                            <span className="px-1.5 py-0.5 text-[10px] font-semibold rounded bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
-                              Otak Inti
-                            </span>
-                          )}
+                            {/* Badge Khusus ESP32 Inti */}
+                            {isEsp32 && (
+                              <span className="px-1.5 py-0.2 text-[9px] sm:text-[10px] font-semibold rounded bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20 shrink-0">
+                                Inti
+                              </span>
+                            )}
+                          </div>
                         </div>
+                      </div>
 
-                        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1 sm:line-clamp-2">
-                          {part.description}
-                        </p>
+                      {/* Bagian Kanan: Button Link & Toggle Detail */}
+                      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                        {part.buttonLink && (
+                          <a
+                            href={part.buttonLink.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={e => e.stopPropagation()}
+                            id={`btn-link-${part.id}`}
+                            className={`inline-flex items-center gap-1 px-2 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold rounded-md sm:rounded-lg transition-all ${
+                              isEsp32
+                                ? 'bg-gradient-to-r from-cyan-600 via-indigo-600 to-fuchsia-600 hover:opacity-90 text-white shadow-xs'
+                                : 'border border-neutral-200 dark:border-neutral-700 hover:border-cyan-500 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-cyan-600 dark:hover:text-cyan-400'
+                            }`}
+                            title={`Buka link dokumentasi ${part.title}`}
+                          >
+                            <span>Link</span>
+                            <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                          </a>
+                        )}
+
+                        <button
+                          type="button"
+                          id={`btn-copy-part-${part.id}`}
+                          onClick={e => handleCopyPartInfo(part, e)}
+                          className="p-1 sm:p-1.5 rounded-md border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                          title="Salin info part"
+                        >
+                          {copiedItemId === part.id ? (
+                            <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-500" />
+                          ) : (
+                            <Copy className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                          )}
+                        </button>
+
+                        <button
+                          type="button"
+                          className="p-1 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 sm:hidden"
+                          aria-label="Buka detail"
+                        >
+                          <ChevronRight
+                            className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                              isExpanded ? 'rotate-90 text-cyan-500' : ''
+                            }`}
+                          />
+                        </button>
                       </div>
                     </div>
 
-                    {/* Bagian Kanan: Button Link & Salin Info */}
-                    <div className="flex items-center justify-between sm:justify-end gap-2.5 shrink-0 pt-1 sm:pt-0 pl-8 sm:pl-0">
-                      {/* Button Link */}
-                      {part.buttonLink && (
-                        <a
-                          href={part.buttonLink.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          id={`btn-link-${part.id}`}
-                          className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-                            isEsp32
-                              ? 'bg-gradient-to-r from-cyan-600 via-indigo-600 to-fuchsia-600 hover:opacity-90 text-white shadow-xs'
-                              : 'border border-neutral-200 dark:border-neutral-700 hover:border-cyan-500 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 hover:text-cyan-600 dark:hover:text-cyan-400'
-                          }`}
-                          title={`Buka link dokumentasi ${part.title}`}
-                        >
-                          <span>{part.buttonLink.label}</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                      )}
-
-                      {/* Tombol Salin Ringkas */}
-                      <button
-                        type="button"
-                        id={`btn-copy-part-${part.id}`}
-                        onClick={() => handleCopyPartInfo(part)}
-                        className="p-1.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-colors cursor-pointer"
-                        title="Salin info part"
-                      >
-                        {copiedItemId === part.id ? (
-                          <Check className="w-3.5 h-3.5 text-emerald-500" />
-                        ) : (
-                          <Copy className="w-3.5 h-3.5" />
-                        )}
-                      </button>
-                    </div>
+                    {/* Detail Accordion Tambahan (Bisa Dibuka di Ponsel/Desktop) */}
+                    {isExpanded && (
+                      <div className="px-3 pb-3 pt-1 text-xs border-t border-neutral-100 dark:border-neutral-800/60 bg-neutral-50/50 dark:bg-neutral-900/30 sm:hidden animate-in fade-in duration-150">
+                        <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                          {part.description}
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-1.5 text-[10px]">
+                          {part.code && (
+                            <span className="font-mono px-1.5 py-0.5 rounded bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+                              Kode: {part.code}
+                            </span>
+                          )}
+                          {part.brand && (
+                            <span className="px-1.5 py-0.5 rounded bg-neutral-200/60 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300">
+                              Brand: {part.brand}
+                            </span>
+                          )}
+                          {part.compatibility && (
+                            <span className="px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-700 dark:text-cyan-300">
+                              {part.compatibility}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -573,59 +623,94 @@ Fungsi: ${item.functionDesc}`;
             </span>
           </div>
 
-          {/* Mode List Minimalis */}
+          {/* Mode List Minimalis & Compact Mobile Accordion */}
           {viewMode === 'list' && (
             <div className="divide-y divide-neutral-200/60 dark:divide-neutral-800/60 border-y border-neutral-200/60 dark:border-neutral-800/60">
-              {filteredSupportingParts.map((item, index) => (
-                <div
-                  key={item.id}
-                  id={`supporting-row-${item.id}`}
-                  className="py-3 px-2 sm:px-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 transition-colors hover:bg-neutral-50/60 dark:hover:bg-neutral-900/40 rounded-lg"
-                >
-                  <div className="flex items-start sm:items-center gap-3 min-w-0">
-                    <span className="font-mono text-xs font-semibold text-neutral-400 dark:text-neutral-500 w-5 shrink-0 pt-0.5 sm:pt-0">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h4 className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
-                          {item.name}
-                        </h4>
-                        <span className="px-1.5 py-0.5 text-[10px] font-mono font-semibold rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
-                          Qty: {item.quantity}
+              {filteredSupportingParts.map((item, index) => {
+                const isExpanded = expandedItemId === item.id;
+
+                return (
+                  <div
+                    key={item.id}
+                    id={`supporting-row-${item.id}`}
+                    className="transition-colors rounded-lg hover:bg-neutral-50/60 dark:hover:bg-neutral-900/40"
+                  >
+                    {/* Baris Utama: Ringkas */}
+                    <div
+                      onClick={() => toggleExpand(item.id)}
+                      className="py-2.5 sm:py-3 px-2 sm:px-3 flex items-center justify-between gap-2 cursor-pointer select-none"
+                    >
+                      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-grow">
+                        <span className="font-mono text-[11px] sm:text-xs font-semibold text-neutral-400 dark:text-neutral-500 w-4 sm:w-5 shrink-0">
+                          {String(index + 1).padStart(2, '0')}
                         </span>
+                        
+                        <div className="min-w-0 flex-grow">
+                          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                            <h4 className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+                              {item.name}
+                            </h4>
+                            <span className="px-1.5 py-0.2 text-[9px] sm:text-[10px] font-mono font-semibold rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 shrink-0">
+                              Qty: {item.quantity}
+                            </span>
+                            {item.spec && (
+                              <span className="hidden md:inline-block text-[11px] font-mono text-neutral-500 dark:text-neutral-400">
+                                • {item.spec}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+                        <span className="text-[10px] sm:text-[11px] font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800/80 px-1.5 sm:px-2 py-0.5 rounded">
+                          {item.type}
+                        </span>
+
+                        <button
+                          type="button"
+                          id={`btn-copy-supp-${item.id}`}
+                          onClick={e => handleCopySupportingInfo(item, e)}
+                          className="p-1 sm:p-1.5 rounded-md border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                          title="Salin info komponen"
+                        >
+                          {copiedItemId === item.id ? (
+                            <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-500" />
+                          ) : (
+                            <Copy className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                          )}
+                        </button>
+
+                        <button
+                          type="button"
+                          className="p-1 text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-200 sm:hidden"
+                          aria-label="Buka detail"
+                        >
+                          <ChevronRight
+                            className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                              isExpanded ? 'rotate-90 text-indigo-500' : ''
+                            }`}
+                          />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Detail Accordion Tambahan di Mobile */}
+                    {isExpanded && (
+                      <div className="px-3 pb-3 pt-1 text-xs border-t border-neutral-100 dark:border-neutral-800/60 bg-neutral-50/50 dark:bg-neutral-900/30 sm:hidden animate-in fade-in duration-150">
+                        <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                          {item.functionDesc}
+                        </p>
                         {item.spec && (
-                          <span className="hidden md:inline-block text-[11px] font-mono text-neutral-500 dark:text-neutral-400">
-                            • {item.spec}
-                          </span>
+                          <div className="mt-1.5 text-[10px] font-mono text-neutral-500 dark:text-neutral-400">
+                            Spesifikasi: {item.spec}
+                          </div>
                         )}
                       </div>
-                      <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1 sm:line-clamp-2">
-                        {item.functionDesc}
-                      </p>
-                    </div>
+                    )}
                   </div>
-
-                  <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 pt-1 sm:pt-0 pl-8 sm:pl-0">
-                    <span className="text-[11px] font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800/80 px-2 py-0.5 rounded">
-                      {item.type}
-                    </span>
-                    <button
-                      type="button"
-                      id={`btn-copy-supp-${item.id}`}
-                      onClick={() => handleCopySupportingInfo(item)}
-                      className="p-1.5 rounded-lg border border-neutral-200/80 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-500/50 transition-colors cursor-pointer"
-                      title="Salin info komponen"
-                    >
-                      {copiedItemId === item.id ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-500" />
-                      ) : (
-                        <Copy className="w-3.5 h-3.5" />
-                      )}
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
 

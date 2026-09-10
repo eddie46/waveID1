@@ -3,7 +3,6 @@ import { Navbar } from './components/Navbar';
 import { HeroProfile } from './components/HeroProfile';
 import { ProjectList } from './components/ProjectList';
 import { AdminWaveidList } from './components/AdminWaveidList';
-import { SkillsSection } from './components/SkillsSection';
 import { SocialSection } from './components/SocialSection';
 import { Footer } from './components/Footer';
 import {
@@ -11,8 +10,7 @@ import {
   projectsData,
   supportingComponentsData,
   adminWaveidData,
-  socialLinks,
-  skillCategories
+  socialLinks
 } from './data/portfolioData';
 
 /**
@@ -113,17 +111,12 @@ export default function App() {
           />
         )}
 
-        {/* 4. Bagian Keahlian & Teknologi (Flexbox Chips) */}
-        <SkillsSection
-          categories={skillCategories}
-        />
-
-        {/* 5. Bagian Tautan Media Sosial & Kontak */}
+        {/* 4. Bagian Tautan Media Sosial & Kontak */}
         <SocialSection
           socials={socialLinks}
         />
 
-        {/* 6. Bagian Footer */}
+        {/* 5. Bagian Footer */}
         <Footer
           name={profileData.name}
         />

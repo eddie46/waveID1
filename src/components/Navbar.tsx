@@ -55,13 +55,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               Daftar Part
             </a>
             <a
-              href="#keahlian"
-              id="nav-link-keahlian"
-              className="hidden xs:inline-block px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-cyan-500/10 dark:hover:bg-cyan-500/15 transition-colors text-[11px] sm:text-sm"
-            >
-              Keahlian
-            </a>
-            <a
               href="#kontak"
               id="nav-link-kontak"
               className="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg hover:text-cyan-600 dark:hover:text-cyan-400 hover:bg-cyan-500/10 dark:hover:bg-cyan-500/15 transition-colors text-[11px] sm:text-sm"
