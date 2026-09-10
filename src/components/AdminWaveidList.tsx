@@ -84,8 +84,8 @@ export const AdminWaveidList: React.FC<AdminWaveidListProps> = ({
         ))}
       </div>
 
-      {/* Grid Kartu Pas Foto Minimalis Para Admin WAVEID */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
+      {/* Grid Kartu Pas Foto Minimalis Para Admin WAVEID (4 Kolom Konsisten di HP & Web) */}
+      <div className="grid grid-cols-4 gap-1.5 sm:gap-4">
         {filteredAdmins.map(admin => {
           const hasImageError = imageErrorMap[admin.id];
           const initials = admin.name
@@ -99,10 +99,10 @@ export const AdminWaveidList: React.FC<AdminWaveidListProps> = ({
             <article
               key={admin.id}
               id={`admin-card-${admin.id}`}
-              className="group rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-white dark:bg-neutral-900/60 p-2 sm:p-3 flex flex-col hover:border-neutral-300 dark:hover:border-neutral-700 transition-all shadow-xs"
+              className="group rounded-lg sm:rounded-xl border border-neutral-200/80 dark:border-neutral-800/80 bg-white dark:bg-neutral-900/60 p-1 sm:p-3 flex flex-col hover:border-neutral-300 dark:hover:border-neutral-700 transition-all shadow-xs"
             >
               {/* Foto Admin Proporsional (3:4) */}
-              <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800 mb-2">
+              <div className="relative w-full aspect-[3/4] rounded-md sm:rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800 mb-1 sm:mb-2">
                 {!hasImageError ? (
                   <img
                     src={admin.photoUrl}
@@ -113,25 +113,25 @@ export const AdminWaveidList: React.FC<AdminWaveidListProps> = ({
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center font-mono font-bold text-neutral-400 text-sm sm:text-lg">
+                  <div className="w-full h-full flex items-center justify-center font-mono font-bold text-neutral-400 text-xs sm:text-lg">
                     {initials}
                   </div>
                 )}
 
                 {/* SubRole Badge Minimalis */}
                 {admin.subRole && (
-                  <span className="absolute top-1.5 right-1.5 px-1.5 py-0.5 rounded text-[9px] sm:text-[10px] font-mono font-semibold bg-black/60 text-white backdrop-blur-xs">
+                  <span className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5 px-1 py-0.2 sm:px-1.5 sm:py-0.5 rounded text-[8px] sm:text-[10px] font-mono font-semibold bg-black/60 text-white backdrop-blur-xs">
                     {admin.subRole}
                   </span>
                 )}
               </div>
 
               {/* Nama dan Jabatan Admin */}
-              <div className="flex flex-col flex-grow justify-between min-h-[32px] sm:min-h-[40px]">
-                <h3 className="text-xs sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate">
+              <div className="flex flex-col flex-grow justify-between min-h-[28px] sm:min-h-[40px]">
+                <h3 className="text-[10px] sm:text-sm font-semibold text-neutral-900 dark:text-neutral-100 truncate text-center sm:text-left">
                   {admin.name}
                 </h3>
-                <p className="text-[10px] sm:text-xs text-neutral-500 dark:text-neutral-400 truncate mt-0.5">
+                <p className="text-[8px] sm:text-xs text-neutral-500 dark:text-neutral-400 truncate mt-0.5 text-center sm:text-left">
                   {admin.role}
                 </p>
               </div>
